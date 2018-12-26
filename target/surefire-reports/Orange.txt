@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: Orange
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.86 sec - in Orange
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 26.529 sec <<< FAILURE! - in Orange
+executeTest(Orange)  Time elapsed: 26.432 sec  <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for url to be "https://opensource-demo.orangehrmlive.com/index.php/admin/viewSystemUsers". Current url: "https://opensource-demo.orangehrmlive.com/index.php/admin/saveSystemUser" (tried for 5 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-AQTKSGT', ip: '192.168.1.162', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.45.615291 (ec3682e3c9061c..., userDataDir: C:\Users\SHADOW~1\AppData\L...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:62811}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: XP, platformName: XP, proxy: Proxy(), rotatable: false, setWindowRect: true, strictFileInteractability: false, takesHeapSnapshot: true, takesScreenshot: true, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unexpectedAlertBehaviour: ignore, unhandledPromptBehavior: ignore, version: 71.0.3578.98, webStorageEnabled: true}
+Session ID: 05a48cfe98590830cceb64262aa1f530
+	at Orange.executeTest(Orange.java:41)
+

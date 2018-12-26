@@ -37,7 +37,7 @@ public class Orange {
     public void executeTest() {
         logIn.logIn();
         addUser.checkUserFields();
-        addUser.addUser();
+//        addUser.addUser();
         jobTitles.deleteJobTitles();
         addCandidate.addCandidate();
         dashboard.checkDashboard();

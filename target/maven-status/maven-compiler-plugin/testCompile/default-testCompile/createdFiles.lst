@@ -1,6 +1,8 @@
 Orange.class
+Page\AddUser.class
 Page\Dashboard.class
 Page\AddCandidate.class
-Page\AddUser.class
+Page\LogOut.class
+Page\PIM.class
 Page\JobTitles.class
 Page\LogIn.class

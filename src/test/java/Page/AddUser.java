@@ -70,7 +70,7 @@ public class AddUser {
         getElement(adminMenu).click();
         getElement(addUserButton).click();
         getElement(employeeName).sendKeys("Fiona Grace");
-        getElement(userName).sendKeys("shadowrazej16");
+        getElement(userName).sendKeys("shadowrazej06");
         getElement(password).sendKeys("qwerty123");
         getElement(confirmPassword).sendKeys("qwerty123");
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.attributeContains(driver.findElement(By.cssSelector(passwordAlert)), "style", "display: none;"));
