@@ -46,7 +46,6 @@ public class JobTitles {
     }
 
     public void deleteJobTitles() {
-        driver.get("https://opensource-demo.orangehrmlive.com/index.php/admin/viewSystemUsers");
         Boolean wait = new WebDriverWait(driver, 5).until(ExpectedConditions.urlToBe("https://opensource-demo.orangehrmlive.com/index.php/admin/viewSystemUsers"));
         if (wait) {
             scrollToElement(getElement(menuAdminView));
