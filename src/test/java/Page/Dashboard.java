@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Dashboard {
 
@@ -49,12 +50,13 @@ public class Dashboard {
 
     public void checkDashboard() {
         getElement(menuPIM).click();
-        int[] subunitPercent = subunitPercent();
+        ArrayList<Integer> subunitPercent = subunitPercent();
         getElement(menuDashboard).click();
-//        quickLaunch();
-        firstPanel(subunitPercent);
+        quickLaunch();
         secondPanel(subunitPercent);
+        firstPanel(subunitPercent);
         thirdPanel();
+        matchLegend();
     }
 
     /*
@@ -69,26 +71,38 @@ public class Dashboard {
         Assert.assertEquals("Timesheets", list.get(2).getText());
     }
 
-    private void firstPanel(int[] subunitPercent) {
+    private void firstPanel(ArrayList<Integer> subunitPercent) {
         Assert.assertEquals("Employee Distribution by Subunit", getElement(firstPanel).getText());
         ArrayList<WebElement> list = getElements(firstPanelElements);
-        for (int i = 0; i < subunitPercent.length; i++) {
-            if (subunitPercent[i] == 0) {
-                continue;
+        for (int i = 0; i < subunitPercent.size(); i++) {
+            if (subunitPercent.get(i) == 0) {
+                subunitPercent.remove(i--);
             }
-            Assert.assertEquals(subunitPercent[i] + "%", list.get(i).getText());
+        }
+        for (int i = 0; i < subunitPercent.size(); i++) {
+            Assert.assertEquals(subunitPercent.get(i) + "%", list.get(i).getText());
         }
     }
 
-    private void secondPanel(int[] subunitPercent) {
-        String[] subunitTitles = {"Not assigned to Subunits", "Administration", "Finance", "IT", "Sales"};
+    private void secondPanel(ArrayList<Integer> subunitPercent) {
         Assert.assertEquals("Legend", getElement(secondPanel).getText());
-        ArrayList<WebElement> list = getElements(secondPanelElements);
-        for (int i = 0; i < subunitPercent.length; i++) {
-            if (subunitPercent[i] == 0) {
-                continue;
+
+        ArrayList<String> listTitles = new ArrayList<>();
+        listTitles.add("Not assigned to Subunits");
+        listTitles.add("Administration");
+        listTitles.add("Finance");
+        listTitles.add("IT");
+        listTitles.add("Sales");
+
+        ArrayList<WebElement> listElements = getElements(secondPanelElements);
+        for (int i = 0; i < subunitPercent.size(); i++) {
+            if (subunitPercent.get(i) == 0) {
+                listTitles.remove(i);
             }
-            Assert.assertEquals(subunitTitles[i], list.get(i).getText());
+        }
+
+        for (int i = 0; i < listTitles.size(); i++) {
+            Assert.assertEquals(listTitles.get(i), listElements.get(i).getText());
         }
     }
 
@@ -102,7 +116,13 @@ public class Dashboard {
         Assert.assertEquals("Total : 0 / 0", listTotal.get(1).getText());
     }
 
-    private int[] subunitPercent() {
+    private void matchLegend() {
+        int countFirstElements = getElements(firstPanelElements).size();
+        int countSecondElements = getElements(secondPanelElements).size();
+        Assert.assertEquals(countFirstElements, countSecondElements);
+    }
+
+    private ArrayList<Integer> subunitPercent() {
         ArrayList<WebElement> list = getElements(subUnitColumn);
         int countSales = 0;
         int countAdministration = 0;
@@ -131,9 +151,14 @@ public class Dashboard {
         return percent(countOther, countAdministration, countFinance, countIT, countSales);
     }
 
-    private int[] percent(int countOther, int countAdministration, int countFinance, int countIT, int countSales) {
+    private ArrayList<Integer> percent(int countOther, int countAdministration, int countFinance, int countIT, int countSales) {
         int sum = countSales + countAdministration + countIT + countFinance + countOther;
-        int[] percentOfSubunits = {countOther * 100 / sum, countAdministration * 100 / sum, countFinance * 100 / sum, countIT * 100 / sum, countSales * 100 / sum};
+        ArrayList<Integer> percentOfSubunits = new ArrayList<>();
+        percentOfSubunits.add(countOther * 100 / sum);
+        percentOfSubunits.add(countAdministration * 100 / sum);
+        percentOfSubunits.add(countFinance * 100 / sum);
+        percentOfSubunits.add(countIT * 100 / sum);
+        percentOfSubunits.add(countSales * 100 / sum);
         return percentOfSubunits;
     }
 }
