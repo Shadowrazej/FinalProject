@@ -93,7 +93,7 @@ public class AddUser {
 
     private void cleanFields() {
         getElement(saveButton).click();
-        Assert.assertEquals("Invalid", getElement(invalidEmployeeName).getText());
+        Assert.assertEquals("Employee does not exist", getElement(invalidEmployeeName).getText());
         Assert.assertEquals("Required", getElement(invalidUserName).getText());
         refresh();
     }
@@ -113,7 +113,7 @@ public class AddUser {
 
     private void invalidEmployeeName() {
         getElement(employeeName).sendKeys("asd");
-        Assert.assertEquals("Invalid", getElement(invalidEmployeeName).getText());
+        Assert.assertEquals("Employee does not exist", getElement(invalidEmployeeName).getText());
         refresh();
     }
 

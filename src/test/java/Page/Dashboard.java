@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Dashboard {
 
@@ -154,11 +153,23 @@ public class Dashboard {
     private ArrayList<Integer> percent(int countOther, int countAdministration, int countFinance, int countIT, int countSales) {
         int sum = countSales + countAdministration + countIT + countFinance + countOther;
         ArrayList<Integer> percentOfSubunits = new ArrayList<>();
-        percentOfSubunits.add(countOther * 100 / sum);
-        percentOfSubunits.add(countAdministration * 100 / sum);
-        percentOfSubunits.add(countFinance * 100 / sum);
-        percentOfSubunits.add(countIT * 100 / sum);
-        percentOfSubunits.add(countSales * 100 / sum);
+        percentOfSubunits.add((int) round(countOther, sum));
+        percentOfSubunits.add((int) round(countAdministration, sum));
+        percentOfSubunits.add((int) round(countFinance, sum));
+        percentOfSubunits.add((int) round(countIT, sum));
+        percentOfSubunits.add((int) round(countSales, sum));
         return percentOfSubunits;
+    }
+
+    private double round(double count, double sum) {
+        double result = count / sum * 100;
+        int intPart = (int) result;
+        double reminder = result - intPart;
+
+        if (reminder >= 0.5) {
+            return Math.ceil(result);
+        } else {
+            return Math.floor(result);
+        }
     }
 }
